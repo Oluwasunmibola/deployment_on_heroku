@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+ <style>
+.button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+</style>
+<title> Flask Web App for Dog, Cat and Pandas Classification</title>
+<h2> Select a file to upload</h2>
+
+<p>
+	{% with messages = get_flashed_messages() %}
+	  {% if messages %}
+		<ul>
+		{% for message in messages %}
+		  <li>{{ message }}</li>
+		{% endfor %}
+		</ul>
+	  {% endif %}
+	{% endwith %}
+</p>
+
+
+
+<form method="post" action="/predict" enctype="multipart/form-data">
+    <dl>
+	<p>
+		<label class="button">
+			<input type="file" name="file" autocomplete="off" required>
+		</label>
+
+	</p>
+
+    {% if filename %}
+	<div>
+		<img src="{{ url_for('display_image', filename=filename) }}">
+	</div>
+    {% endif %}
+    <p>
+        {{ class_name }}
+    </p>
+    </dl>
+    <p>
+	<input type="submit" value="Submit" class="button">
+    </p>
+</form>
